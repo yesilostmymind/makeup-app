@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//struct are used for grouping data together, a collection of fields like first name, last name, address.. for a person
 type Person struct {
 	ID 		  string   'json:"id,omitempty"'
 	Fristname string   'json:"firstname,omitempty"'
@@ -15,10 +16,14 @@ type Person struct {
 	Address   *Address 'json:"address,omitempty"'
 }
 
+//here is the address struct
 type Address struct {
 	City  string 'json:"city,omitempty"'
 	State string 'json:"state,omitempty"'
 }
+
+//the universal verable people is declated, it is a slice of person
+var people []Person
 
 func GetPersonEndpoint(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
@@ -39,7 +44,6 @@ func GetPeopleEndpoint(w http.ResponseWriter, req *http.Request){
 func CreatePersonEndpoint(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	var person Person
-
 	_ =json.NewDecoder(req.Body).Decode(&person)
 	perosn.ID = params["id"]
 	people = append(people, person)
