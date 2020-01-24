@@ -9,6 +9,8 @@ package main
 //packages, other Go source files you want to use are added with import paths
 
 import (
+	"io/ioutil"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -26,11 +28,12 @@ type event struct {
 //why a type and not a var? either way its a slice
 type allEvents []event
 
+//dummy database, please include commas at the end of lines 
 var events = allEvents{
 	{
 		ID:          "1",
 		Title:       "Makeup collection application",
-		Description: "This is an app to store your makeup and stuff or whatever"
+		Description: "This is an app to store your makeup and stuff or whatever",
 	},
 }
 
@@ -41,7 +44,7 @@ func createEvent(w http.ResponseWriter, r *http.Request){
 		fmt.Fprintf(w, "title and description only for update, thenk you!")
 	}
 
-	json.Unmarchal(reqBody, &newEvent)
+	json.Unmarshal(reqBody, &newEvent)
 	event = append(events, newEvent)
 	w.WriteHeader(http.StatusCreated)
 
