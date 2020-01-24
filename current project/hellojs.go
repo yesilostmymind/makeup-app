@@ -16,6 +16,38 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//this struct groups together the data for the type event, including the ID, title and description
+type event struct {
+	ID          string `json:"ID,omitempty"`
+	Title       string `json:"Title,omitempty"`
+	Description string `json:"Description,omitempty"`
+}
+
+//why a type and not a var? either way its a slice
+type allEvents []event
+
+var events = allEvents{
+	{
+		ID:          "1",
+		Title:       "Makeup collection application",
+		Description: "This is an app to store your makeup and stuff or whatever"
+	},
+}
+
+func createEvent(w http.ResponseWriter, r *http.Request){
+	var newEvent event
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Fprintf(w, "title and description only for update, thenk you!")
+	}
+
+	json.Unmarchal(reqBody, &newEvent)
+	event = append(events, newEvent)
+	w.WriteHeader(http.StatusCreated)
+
+	json.NewEncoder(w).Encode(newEvent)
+}
+
 //this is a function called homeLink will display "welcome home!" 
 func homeLink(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome home!")
