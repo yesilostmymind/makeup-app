@@ -37,6 +37,7 @@ var events = allEvents{
 	},
 }
 
+//function that are not used are meaningless, declare them in the main statment if you intend to use it. 
 func createEvent(w http.ResponseWriter, r *http.Request) {
 	var newEvent event
 	reqBody, err := ioutil.ReadAll(r.Body)
@@ -51,7 +52,7 @@ func createEvent(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(newEvent)
 }
 
-/*
+//this shows a single event, see how the method is specified in the main func
 func getOneEvent(w http.ResponseWriter, r *http.Request) {
 	eventID := mux.Vars(r)["id"]
 
@@ -61,7 +62,6 @@ func getOneEvent(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
-*/
 
 //this is a function called homeLink will display "welcome home!" 
 func homeLink(w http.ResponseWriter, r *http.Request) {
@@ -73,5 +73,6 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", homeLink)
 	router.HandleFunc("/event", createEvent)
+	router.HandleFunc("/events/{id}", getOneEvent).Methods("GET")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
