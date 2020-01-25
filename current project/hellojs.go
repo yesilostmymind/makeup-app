@@ -67,6 +67,27 @@ func getAllEvents(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(events)
 }
 
+//event updating works, I haven't gotten it to show the err yet tho
+func updateEvent (w http.ResponseWriter, r *http.Request) {
+	eventID := mux.Vars(r)["id"]
+	var updatedEvent event
+
+	reqBody, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Fprintf(w, "event update requires title and description only, please do")
+	}
+	json.Unmarshal(reqBody, &updatedEvent)
+
+	for i, singleEvent := range events {
+		if singleEvent.ID == eventID {
+			singleEvent.Title = updatedEvent.Title
+			singleEvent.Description = updatedEvent.Description
+			events = append(events[:i], singleEvent)
+			json.NewEncoder(w).Encode(singleEvent)
+		}
+	}
+}
+
 //this is a function called homeLink will display "welcome home!" 
 func homeLink(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome home!")
@@ -79,5 +100,6 @@ func main() {
 	router.HandleFunc("/event", createEvent)
 	router.HandleFunc("/events/{id}", getOneEvent).Methods("GET")
 	router.HandleFunc("/events", getAllEvents).Methods("GET")
+	router.HandleFunc("/events/{id}", updateEvent).Methods("PATCH")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
