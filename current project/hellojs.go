@@ -6,7 +6,7 @@ not currently compiling, error "inconsistent vendoring in C:\Go\src:
 
 package main
 
-//packages, other Go source files you want to use are added with import paths
+//packages, other Go source files you want to use are added with import paths, if you need to use say json for example, you must first import it here, go is like: json, I don't know her
 
 import (
 	"io/ioutil"
@@ -37,7 +37,7 @@ var events = allEvents{
 	},
 }
 
-func createEvent(w http.ResponseWriter, r *http.Request){
+func createEvent(w http.ResponseWriter, r *http.Request) {
 	var newEvent event
 	reqBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -45,11 +45,23 @@ func createEvent(w http.ResponseWriter, r *http.Request){
 	}
 
 	json.Unmarshal(reqBody, &newEvent)
-	event = append(events, newEvent)
+	events = append(events, newEvent)
 	w.WriteHeader(http.StatusCreated)
 
 	json.NewEncoder(w).Encode(newEvent)
 }
+
+/*
+func getOneEvent(w http.ResponseWriter, r *http.Request) {
+	eventID := mux.Vars(r)["id"]
+
+	for _, singleEvent := range events {
+		if singleEvent.ID == eventID {
+			json.NewEncoder(w).Encode(singleEvent)
+		}
+	}
+}
+*/
 
 //this is a function called homeLink will display "welcome home!" 
 func homeLink(w http.ResponseWriter, r *http.Request) {
@@ -60,5 +72,6 @@ func homeLink(w http.ResponseWriter, r *http.Request) {
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", homeLink)
+	router.HandleFunc("/event", createEvent)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
