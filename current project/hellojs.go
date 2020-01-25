@@ -20,7 +20,7 @@ import (
 
 //this struct groups together the data for the type event, including the ID, title and description
 type event struct {
-	ID          string `json:"ID,omitempty"`
+	ID          string `json:"ID"`
 	Title       string `json:"Title,omitempty"`
 	Description string `json:"Description,omitempty"`
 }
@@ -88,6 +88,18 @@ func updateEvent (w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//deleteEvent working, please remember to include what verable you want used, w/o eventID printed "...ID with %v! (DELETE)..."
+func deleteEvent(w http.ResponseWriter, r *http.Request) {
+	eventID := mux.Vars(r)["id"]
+
+	for i, singleEvent := range events {
+		if singleEvent.ID == eventID {
+			events = append(events[:i], events[i+1:]...)
+			fmt.Fprintf(w, "The event with ID %v has been deleted, oops and/or yay!", eventID)
+		}
+	}
+}
+
 //this is a function called homeLink will display "welcome home!" 
 func homeLink(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome home!")
@@ -97,9 +109,10 @@ func homeLink(w http.ResponseWriter, r *http.Request) {
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", homeLink)
-	router.HandleFunc("/event", createEvent)
+	router.HandleFunc("/event", createEvent).Methods("POST")
 	router.HandleFunc("/events/{id}", getOneEvent).Methods("GET")
 	router.HandleFunc("/events", getAllEvents).Methods("GET")
 	router.HandleFunc("/events/{id}", updateEvent).Methods("PATCH")
+	router.HandleFunc("/events/{id}", deleteEvent).Methods("DELETE")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
