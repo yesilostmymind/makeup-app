@@ -4,22 +4,15 @@ import { Card, Header, Form, Input, Icon } from "semantic-ui-react";
 
 let endpoint = "http://localhost:8080"
 
-const CardItems = () (
+const CardItems = () => (
 	
-	compoenntDidMount(){
-		fetch('http://localhost:8080/events/1')
-		.then(res => res.json())
-		.then((data) => {
-			this.setState({ events: data})
-		})
-		.catch(console.log)
-	}
 	//<Segment inverted> dark background not working yet
 		<Card.Group itmesPerRow={1}>
 			<Card color='purple'> 
 				<Card.Content>
 					/* <Image floated='right'/> */
-					<Card.Header>{events.Title}</Card.Header> //this will be the item name
+					<Card.Header>{events.Title}</Card.Header> // item name 
+					//<Card.Meta></Card.Meta> // brand name
 					<Card.Description>{events.Description}</Card.Description> //this will be the item Description
 				</Card.Content>
 				<Card.Content extra>
@@ -42,7 +35,16 @@ const CardItems = () (
 
     	</Card.Group>
     //</Segment>
-)
+);
+
+	compoenntDidMount() {
+		fetch(endpoint + "/events/1")
+		.then(res => res.json())
+		.then((data) => {
+			this.setState({ events: data})
+		})
+		.catch(console.log)
+	}
 
 /*
 class MakeupDataBase extends Component {

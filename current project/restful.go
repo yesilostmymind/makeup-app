@@ -26,8 +26,8 @@ type allEvents []event
 var events = allEvents{
 	{
 		ID:          "1",
-		Title:       "Makeup collection application",
-		Description: "This is an app to store your makeup and stuff or whatever",
+		Title:       "Glaze #1 by Inn Beauty",
+		Description: "plumping gloss oil hybrid, translucent red, candy apple flavor",
 	},
 }
 

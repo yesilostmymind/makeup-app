@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "./App.css";
 
-import { Container, Header, List } from "semantic-ui-react";
+import { Container, Header, List, Segment } from "semantic-ui-react";
 
 import Frontend from "./frontend";
 
@@ -11,7 +11,7 @@ const App = ({ children }) => (
 		<Segment inverted>
 			<Header as="h1" color="violet">MakeupDB</Header>
 			<p>this is an app to store your makeup</p>
-		</Segment inverted>
+		</Segment>
 		
 		{children}
 	</Container>
