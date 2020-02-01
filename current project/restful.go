@@ -1,9 +1,3 @@
-/*
-not currently compiling, error "inconsistent vendoring in C:\Go\src:
-        go.mod requires github.com/gorilla/mux v1.7.3 but vendor/modules.txt does not include it.
-        run 'go mod tidy; go mod vendor' to sync" further errors upon the suggested run comand
-*/
-
 package main
 
 //packages, other Go source files you want to use are added with import paths, if you need to use say json for example, you must first import it here, go is like: json, I don't know her
