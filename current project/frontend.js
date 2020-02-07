@@ -4,8 +4,7 @@ import { Card, Header, Form, Input, Icon } from "semantic-ui-react";
 
 let endpoint = "http://localhost:8080"
 
-const CardItems = () => (
-	
+const CardItems = () => (	
 	//<Segment inverted> dark background not working yet
 		<Card.Group itmesPerRow={1}>
 			<Card color='purple'> 
@@ -37,28 +36,22 @@ const CardItems = () => (
     //</Segment>
 );
 
-	compoenntDidMount() {
-		fetch(endpoint + "/events/1")
-		.then(res => res.json())
-		.then((data) => {
-			this.setState({ events: data})
-		})
-		.catch(console.log)
-	}
+function Frontend(){
+	/* should the componentDidmount go here?
+	and the CardItem goes here*/
+} 
 
-/*
-class MakeupDataBase extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			task: "",
-			items: []
-		};
-	}
-
-	compoenntDidMount() {
-		this.getTask();
-	}
+componentDidMount() {
+	fetch(endpoint + "/events/1")
+	.then(res => res.json())
+	.then((data) => {
+		this.setState({ events: data})
+	})
+	.catch(console.log)
 }
-*/
+
+ReactDOM.render(
+	<Frontend>
+
+	</Frontend>
+);
