@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>makeup DB</title>
+	<meta  name="viewpoint" content="width=device-width, initial-scale=1">
+</head>
+<body style="font-family: Impact, Charcoal, sans-serif;">
+	<h1>makeup database app</h1>
+
+	<p>You are on: <span id="locationSpan"></span></p>
+
+	<p>Check out: </p>
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li><a href="/mycollection">My Collection</a></li>
+		<li><a href="/myfavorites">My Favorites</li>
+	</ul>
+
+	<script>
+		const span = document.qurySelector('#locationSpan')
+		span.innerHTML = window.location.pathname
+	</script>
+</body>
+</html>
