@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1 id="title">M2M reg form</h1>
+    <p id="description">Please fill this form out to gain access to M2M</p>
+    <form id="survey-form">
+      <fieldset>
+        <label id="name-label">Enter Your Name: <input id="name" name="first-name" type="text" placeholder="Sporty Spice" required /></label>
+        <label for="username">Enter Your desired Screen Name: <input name="username" id="username" pattern="[A-Za-z0-9]+"/></label>
+        <label id="email-label">Enter Your Email: <input id="email" name="email" type="email" placeholder="username@server.com" required /></label>
+        <label for="new-password">Create a New Password: <input id="new-password" name="new-password" type="password" pattern="[a-z0-5]{8,}" required /></label>
+        <label id="number-label">Enter your favorite number: <input id="number" name="fave-num" type="number" pattern="[0-9]" min="0" max="65535" placeholder="666" required /></label>
+      </fieldset>
+      <fieldset>
+        <label for="profile-picture">Upload a profile picture: <input id="profile-picture" type="file" name="file" /></label>
+        <label for="age">Input your age (years): <input id="age" type="number" name="age" min="13" max="120" /></label>
+        <label for="referrer">How did you hear about us?
+          <select id="dropdown" name="referrer">
+            <option value="">(select one)</option>
+            <option value="1">socail media</option>
+            <option value="2">YouTube</option>
+            <option value="3">Forum</option>
+            <option value="4">Friend</option>
+            <option value="5">Other</option>
+          </select>
+        </label>
+        <label for="bio">Provide a bio:
+          <textarea id="bio" name="bio" rows="3" cols="30" placeholder="I use they/them pronouns..."></textarea>
+        </label>
+      </fieldset>
+      <fieldset>
+        <label for="personal-account"><input value="personal-account" id="personal-account" type="radio" name="account-type" class="inline" /> Personal Account</label>
+        <label for="business-account"><input value="business-account"id="business-account" type="radio" name="account-type" class="inline" /> Business Account</label>
+        <label for="terms-and-conditions" name="terms-and-conditions">
+          <input value="t&c" id="terms-and-conditions" type="checkbox" required name="terms-and-conditions" class="inline" /> I accept the <a href="https://youtu.be/dQw4w9WgXcQ">terms and conditions</a>
+        </label>
+        <label for="email-sign-up" name="email-sign-up">
+          <input value="email-sign-up" id="email-sign-up" type="checkbox"  name="email-sign-up" class="inline" /> Sign me up for email updates!
+        </label>
+      </fieldset>
+      <input id="submit" type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
